@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<!--
+  Fichier: index.html
+  Rôle: Page principale statique affichant le flowchart Mermaid et les sections Step 1–8 + Objectif final.
+  Dépendances: styles.css, app.js, CDN Mermaid.
+  Notes: Layout 2 colonnes responsive, liens entre nœuds et sections via ancres.
+-->
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Axima Marine – Trajectoire digitale (WMS/OpenBoxes → ERP)</title>
+    <meta name="description" content="Trajectoire Axima Marine: WMS OpenBoxes, QR, Plis & Colis, SAP, HVAC, Qualité/SAV, Reporting, Chatbot, ERP métier." />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <h1 class="site-title">Projet Axima Marine – Digitalisation logistique et production HVAC</h1>
+      <nav class="site-nav">
+        <a href="#top">Haut</a>
+        <a href="#step1">Step 1</a>
+        <a href="#step2">Step 2</a>
+        <a href="#step3">Step 3</a>
+        <a href="#step4">Step 4</a>
+        <a href="#step5">Step 5</a>
+        <a href="#step6">Step 6</a>
+        <a href="#step7">Step 7</a>
+        <a href="#step8">Step 8</a>
+        <a href="#objectif">Objectif</a>
+      </nav>
+    </header>
+
+    <main id="top" class="layout">
+      <section class="diagram-panel" aria-label="Diagramme Mermaid">
+        <div class="mermaid" id="flowchart">
+flowchart TB
+  %% Pipeline linéaire avec phrases explicites dans les nœuds (ASCII pur)
+
+  START([Projet Axima Marine - digitalisation logistique et production HVAC])
+
+  %% STEP 1 - SOCLE
+  START --> Q1{Step 1 - Socle de départ}
+  Q1 -->|OpenBoxes| S1A[OpenBoxes WMS: base unifiée, modèle et API existants, dev modules plus rapide et cohérent]
+  Q1 -->|Sans OpenBoxes| S1B[Plateforme interne: dev dédié full stack, toutes les liaisons à construire, complexité élevée]
+  S1A --> NEXT1[Continuer]
+  S1B --> NEXT1
+
+  %% STEP 2 - QR
+  NEXT1 --> Q2{Step 2 - QR code}
+  Q2 -->|OpenBoxes| S2A[Module QR dans WMS: events unifiés, scan mobile natif, droits et audit centralisés]
+  Q2 -->|Sans OpenBoxes| S2B[Outil QR séparé: mapping stock et colis à coder, sync et reprise plus fragiles]
+  S2A --> NEXT2[Continuer]
+  S2B --> NEXT2
+
+  %% STEP 3 - PLIS et COLIS
+  NEXT2 --> Q3{Step 3 - Plis et Colis}
+  Q3 -->|OpenBoxes| S3A[Plis Colis natif: timeline, filtres, liens lots et ACR, réutilise référentiels du WMS]
+  Q3 -->|Sans OpenBoxes| S3B[Ingestion CSV ou API: vues à fabriquer, référentiels à recréer, risque écarts et doublons]
+  S3A --> NEXT3[Continuer]
+  S3B --> NEXT3
+
+  %% STEP 4 - SAP
+  NEXT3 --> Q4{Step 4 - Intégration SAP}
+  Q4 -->|OpenBoxes| S4A[Connecteur SAP dans cadre WMS: dédoublonnage et logs existants, anti double saisie]
+  Q4 -->|Sans OpenBoxes| S4B[Connecteur SAP sur mesure: formats et deltas à définir, contrôles et rejets à coder]
+  S4A --> NEXT4[Continuer]
+  S4B --> NEXT4
+
+  %% STEP 5 - HVAC LINES
+  NEXT4 --> Q5{Step 5 - Lignes production HVAC}
+  Q5 -->|OpenBoxes| S5A[Lignes HVAC liées au stock: suivi opérateurs, temps de passage, rendements, réappro guidé]
+  Q5 -->|Sans OpenBoxes| S5B[MES ponctuel: liaisons stock à maintenir, schéma qui dérive, effort intégration récurrent]
+  S5A --> NEXT5[Continuer]
+  S5B --> NEXT5
+
+  %% STEP 6 - QUALITE et SAV
+  NEXT5 --> Q6{Step 6 - Qualité et SAV}
+  Q6 -->|OpenBoxes| S6A[NCR et SAV reliés aux QR events: photos, commentaires, historique unique et consultable]
+  Q6 -->|Sans OpenBoxes| S6B[Outils séparés: liens partiels avec QR et stock, consolidations fréquentes et erreurs]
+  S6A --> NEXT6[Continuer]
+  S6B --> NEXT6
+
+  %% STEP 7 - REPORTING
+  NEXT6 --> Q7{Step 7 - Reporting et BI}
+  Q7 -->|OpenBoxes| S7A[Power BI sur base unifiée: datasets stables, rafraîchissement simple, KPIs fiables]
+  Q7 -->|Sans OpenBoxes| S7B[BI multi-sources: ETL lourd, contrôles additionnels, qualité donnée variable]
+  S7A --> NEXT7[Continuer]
+  S7B --> NEXT7
+
+  %% STEP 8 - CHATBOT
+  NEXT7 --> Q8{Step 8 - Chatbot chantier}
+  Q8 -->|OpenBoxes| S8A[Chatbot via API WMS: schémas stables, réponses fiables, rapports auto plus faciles]
+  Q8 -->|Sans OpenBoxes| S8B[Chatbot sur schémas hétérogènes: dev long, maintenance élevée, risque incohérences]
+  S8A --> FINAL[Objectif final: trajectoire ERP métier Axima Marine avec cohérence et délai maîtrisé]
+  S8B --> FINAL
+
+  %% Styles (couleurs valides)
+  style START fill:#f9ebea,stroke:#b03a2e,stroke-width:2px
+  style Q1 fill:#fdf2e9,stroke:#b9770e
+  style Q2 fill:#fdf2e9,stroke:#b9770e
+  style Q3 fill:#fdf2e9,stroke:#b9770e
+  style Q4 fill:#fdf2e9,stroke:#b9770e
+  style Q5 fill:#fdf2e9,stroke:#b9770e
+  style Q6 fill:#fdf2e9,stroke:#b9770e
+  style Q7 fill:#fdf2e9,stroke:#b9770e
+  style Q8 fill:#fdf2e9,stroke:#b9770e
+  style FINAL fill:#d2b4de,stroke:#7d3c98,stroke-width:3px
+
+  %% Click → Sections
+  click Q1 "#step1" "Aller à Step 1"
+  click S1A "#step1" "Aller à Step 1"
+  click S1B "#step1" "Aller à Step 1"
+  click Q2 "#step2" "Aller à Step 2"
+  click S2A "#step2" "Aller à Step 2"
+  click S2B "#step2" "Aller à Step 2"
+  click Q3 "#step3" "Aller à Step 3"
+  click S3A "#step3" "Aller à Step 3"
+  click S3B "#step3" "Aller à Step 3"
+  click Q4 "#step4" "Aller à Step 4"
+  click S4A "#step4" "Aller à Step 4"
+  click S4B "#step4" "Aller à Step 4"
+  click Q5 "#step5" "Aller à Step 5"
+  click S5A "#step5" "Aller à Step 5"
+  click S5B "#step5" "Aller à Step 5"
+  click Q6 "#step6" "Aller à Step 6"
+  click S6A "#step6" "Aller à Step 6"
+  click S6B "#step6" "Aller à Step 6"
+  click Q7 "#step7" "Aller à Step 7"
+  click S7A "#step7" "Aller à Step 7"
+  click S7B "#step7" "Aller à Step 7"
+  click Q8 "#step8" "Aller à Step 8"
+  click S8A "#step8" "Aller à Step 8"
+  click S8B "#step8" "Aller à Step 8"
+  click START "#top" "Haut de page"
+  click FINAL "#objectif" "Aller à l'Objectif final"
+        </div>
+      </section>
+
+      <aside class="content-panel" aria-label="Contenus détaillés">
+        <article id="step1" class="content-block">
+          <h2>Step 1 – Socle</h2>
+          <h3>Avec OpenBoxes</h3>
+          <p>
+            On démarre sur un WMS open source existant. Ça veut dire qu’on bénéficie dès le départ d’un modèle de données éprouvé, d’une API REST, d’une gestion des rôles et d’une historisation. Les développements qu’on ajoute s’appuient sur ce cadre, ce qui réduit les risques et accélère l’intégration.
+          </p>
+          <h3>Sans OpenBoxes</h3>
+          <p>
+            On crée une plateforme interne sur mesure. Chaque brique (données, API, sécurité, droits, logs) doit être conçue et développée. Le résultat peut coller exactement au besoin, mais la charge de développement, de tests et de maintenance est nettement plus élevée.
+          </p>
+        </article>
+
+        <article id="step2" class="content-block">
+          <h2>Step 2 – QR code</h2>
+          <h3>Avec OpenBoxes</h3>
+          <p>
+            On développe le module QR à l’intérieur du WMS. Les scans mettent à jour les statuts au même endroit que le stock et les colis. Les événements sont unifiés, l’historique est centralisé.
+          </p>
+          <h3>Sans OpenBoxes</h3>
+          <p>
+            On développe un outil QR séparé. Il faut ensuite construire et maintenir la liaison avec le stock et les colis. Les données se dispersent et la cohérence dépend de synchronisations supplémentaires.
+          </p>
+        </article>
+
+        <article id="step3" class="content-block">
+          <h2>Step 3 – Plis &amp; Colis</h2>
+          <h3>Avec OpenBoxes</h3>
+          <p>
+            On développe le module “Planning / Historique Plis &amp; Colis” dans l’application. Les timelines, filtres et liens avec les lots/ACR et QR sont natifs, donc immédiatement cohérents avec l’inventaire.
+          </p>
+          <h3>Sans OpenBoxes</h3>
+          <p>
+            On code l’ingestion des fichiers atelier (CSV/Excel) ou des API et on fabrique les vues. Les référentiels sont à recréer et à aligner, ce qui alourdit la charge d’intégration et multiplie les points de défaillance.
+          </p>
+        </article>
+
+        <article id="step4" class="content-block">
+          <h2>Step 4 – SAP</h2>
+          <h3>Avec OpenBoxes</h3>
+          <p>
+            On développe un connecteur SAP à l’intérieur du cadre WMS. Les contrôles d’intégrité, le dédoublonnage et les logs reposent sur des mécanismes déjà présents.
+          </p>
+          <h3>Sans OpenBoxes</h3>
+          <p>
+            On doit coder un connecteur SAP sur mesure (formats, delta, reprises). Chaque règle métier et chaque contrôle d’intégrité sont à concevoir, documenter et maintenir.
+          </p>
+        </article>
+
+        <article id="step5" class="content-block">
+          <h2>Step 5 – Lignes de production HVAC</h2>
+          <h3>Avec OpenBoxes</h3>
+          <p>
+            On développe les lignes HVAC liées directement au stock, avec suivi des opérateurs, des temps de passage et des rendements. Les consommations de composants et les statuts restent dans un même système.
+          </p>
+          <h3>Sans OpenBoxes</h3>
+          <p>
+            On développe un MES ponctuel puis on l’interface avec les données de stock. Il faut maintenir les mappings, gérer les écarts et surveiller les doublons dans le temps.
+          </p>
+        </article>
+
+        <article id="step6" class="content-block">
+          <h2>Step 6 – Qualité (NCR) &amp; SAV</h2>
+          <h3>Avec OpenBoxes</h3>
+          <p>
+            On développe le workflow NCR et le SAV dans la même base, reliés aux QR events. Les photos, commentaires et validations alimentent un historique unique par pièce/lot.
+          </p>
+          <h3>Sans OpenBoxes</h3>
+          <p>
+            On développe des outils séparés pour la qualité et le SAV. Le lien avec les événements QR et le stock est partiel ou à synchroniser régulièrement, ce qui augmente les risques d’incohérence.
+          </p>
+        </article>
+
+        <article id="step7" class="content-block">
+          <h2>Step 7 – Reporting / Power BI</h2>
+          <h3>Avec OpenBoxes</h3>
+          <p>
+            On branche Power BI sur une base unifiée. Les datasets sont stables, le rafraîchissement est simple, et les KPI (avancement, NCR, SAV) exploitent une source unique.
+          </p>
+          <h3>Sans OpenBoxes</h3>
+          <p>
+            La BI doit agréger plusieurs sources hétérogènes. On met en place des ETL plus lourds, des traitements de consolidation et davantage de contrôles pour garantir la qualité des données.
+          </p>
+        </article>
+
+        <article id="step8" class="content-block">
+          <h2>Step 8 – Chatbot chantier</h2>
+          <h3>Avec OpenBoxes</h3>
+          <p>
+            On connecte le chatbot à l’API du WMS. Les requêtes en langage naturel s’appuient sur des schémas de données stables et centralisés ; les rapports automatiques sont plus fiables.
+          </p>
+          <h3>Sans OpenBoxes</h3>
+          <p>
+            Le chatbot doit composer avec des schémas hétérogènes. Le développement est plus long, la maintenance plus coûteuse, et le risque d’incohérences de réponses est plus élevé.
+          </p>
+        </article>
+
+        <article id="objectif" class="content-block">
+          <h2>Objectif final – Trajectoire ERP métier</h2>
+          <p>
+            Dans les deux cas, on vise un ERP métier pour Axima Marine. La différence, c’est le coût total de possession, la vitesse d’itération et la cohérence des données : avec OpenBoxes, chaque module est bien un développement, mais il est réalisé dans un cadre commun qui accélère, sécurise et unifie. Sans OpenBoxes, chaque module est un développement dédié, avec plus de liaisons à construire et à maintenir, donc plus de complexité et de risques.
+          </p>
+        </article>
+      </aside>
+    </main>
+
+    <footer class="site-footer">
+      <small>© 2025 Axima Marine — Présentation interne</small>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js" integrity="sha384-1" crossorigin="anonymous"></script>
+    <script src="app.js"></script>
+  </body>
+  </html>
+
+
