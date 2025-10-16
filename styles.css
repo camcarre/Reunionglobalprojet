@@ -76,6 +76,21 @@ body {
   border: 1px solid var(--border);
 }
 
+/* Logo Axima */
+.logo-axima {
+  position: fixed;
+  top: 16px;
+  right: 24px;
+  z-index: 100;
+  background: transparent;
+}
+
+.logo-axima img {
+  height: 50px;
+  width: auto;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
 /* Container principal */
 .presentation-container {
   width: 100vw;
@@ -303,7 +318,7 @@ body {
 .mermaid .edgeLabel {
   font-size: 14px !important;
   font-weight: 600 !important;
-  background-color: rgba(30, 41, 59, 0.95) !important;
+  background-color: transparent !important;
 }
 
 /* Grille de comparaison */
